@@ -20,19 +20,19 @@ const createGallery = galleryItems
 
 galleryContainer.insertAdjacentHTML("beforeend", createGallery);
 
+let instance;
+
 galleryContainer.addEventListener("click", (event) => {
   event.preventDefault();
   const onClick = event.target.dataset.source;
   if (!onClick) return;
-
-  const instance = basicLightbox.create(`
-<img src="${onClick}" width="800" height="600"></img>
- `);
+  
+  instance = basicLightbox.create(`<img src="${onClick}">`);
   instance.show();
+});
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && instance.visible()) instance.close();
-  });
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && instance.visible()) instance.close();
 });
 
 console.log(galleryItems);
